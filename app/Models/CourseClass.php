@@ -14,6 +14,9 @@ class CourseClass extends Model
         'name',
         'enrollment_key',
         'academic_year',
+        'day',
+        'start_time',
+        'end_time',
     ];
 
     public function course()

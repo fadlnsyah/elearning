@@ -50,9 +50,25 @@ Route::middleware('auth')->group(function () {
     Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('dashboard');
 
-        // Simple Admin route protection check inside controller or here
+        // Users
+        Route::get('/users', [AdminController::class, 'indexUsers'])->name('users.index');
         Route::post('/users', [AdminController::class, 'storeUser'])->name('users.store');
+        Route::get('/users/{user}/edit', [AdminController::class, 'editUser'])->name('users.edit');
+        Route::put('/users/{user}', [AdminController::class, 'updateUser'])->name('users.update');
+        Route::delete('/users/{user}', [AdminController::class, 'destroyUser'])->name('users.destroy');
+
+        // Courses
+        Route::get('/courses', [AdminController::class, 'indexCourses'])->name('courses.index');
         Route::post('/courses', [AdminController::class, 'storeCourse'])->name('courses.store');
+        Route::get('/courses/{course}/edit', [AdminController::class, 'editCourse'])->name('courses.edit');
+        Route::put('/courses/{course}', [AdminController::class, 'updateCourse'])->name('courses.update');
+        Route::delete('/courses/{course}', [AdminController::class, 'destroyCourse'])->name('courses.destroy');
+
+        // Classes
+        Route::get('/classes', [AdminController::class, 'indexClasses'])->name('classes.index');
         Route::post('/classes', [AdminController::class, 'storeClass'])->name('classes.store');
+        Route::get('/classes/{courseClass}/edit', [AdminController::class, 'editClass'])->name('classes.edit');
+        Route::put('/classes/{courseClass}', [AdminController::class, 'updateClass'])->name('classes.update');
+        Route::delete('/classes/{courseClass}', [AdminController::class, 'destroyClass'])->name('classes.destroy');
     });
 });

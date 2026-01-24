@@ -65,19 +65,22 @@
                 <x-nav-link :href="route('admin.dashboard')" :active="request()->routeIs('admin.dashboard')">
                     Admin Dashboard
                 </x-nav-link>
+
+                <div class="pt-4 pb-1 px-3 text-xs font-semibold text-slate-400 uppercase tracking-wider">
+                    Manage Data
+                </div>
+                <x-nav-link :href="route('admin.users.index')" :active="request()->routeIs('admin.users.*')">
+                    Users
+                </x-nav-link>
+                <x-nav-link :href="route('admin.courses.index')" :active="request()->routeIs('admin.courses.*')">
+                    Courses
+                </x-nav-link>
+                <x-nav-link :href="route('admin.classes.index')" :active="request()->routeIs('admin.classes.*')">
+                    Classes
+                </x-nav-link>
                 @endif
             </div>
-            <div class="p-4 border-t border-slate-100">
-                <form method="POST" action="{{ route('logout') }}">
-                    @csrf
-                    <button class="w-full flex items-center justify-start px-3 py-2 text-sm font-medium text-slate-500 hover:text-red-600 hover:bg-red-50 rounded-lg transition-colors gap-2">
-                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
-                        </svg>
-                        Sign Out
-                    </button>
-                </form>
-            </div>
+            <!-- Sign Out moved to Header Profile Dropdown -->
         </aside>
 
         <!-- Overlay for mobile -->
