@@ -52,6 +52,7 @@ Route::middleware('auth')->group(function () {
 
         // Users
         Route::get('/users', [AdminController::class, 'indexUsers'])->name('users.index');
+        Route::get('/users/create', [AdminController::class, 'createUser'])->name('users.create');
         Route::post('/users', [AdminController::class, 'storeUser'])->name('users.store');
         Route::get('/users/{user}/edit', [AdminController::class, 'editUser'])->name('users.edit');
         Route::put('/users/{user}', [AdminController::class, 'updateUser'])->name('users.update');
@@ -59,6 +60,7 @@ Route::middleware('auth')->group(function () {
 
         // Courses
         Route::get('/courses', [AdminController::class, 'indexCourses'])->name('courses.index');
+        Route::get('/courses/create', [AdminController::class, 'createCourse'])->name('courses.create');
         Route::post('/courses', [AdminController::class, 'storeCourse'])->name('courses.store');
         Route::get('/courses/{course}/edit', [AdminController::class, 'editCourse'])->name('courses.edit');
         Route::put('/courses/{course}', [AdminController::class, 'updateCourse'])->name('courses.update');
@@ -66,6 +68,7 @@ Route::middleware('auth')->group(function () {
 
         // Classes
         Route::get('/classes', [AdminController::class, 'indexClasses'])->name('classes.index');
+        Route::get('/classes/create', [AdminController::class, 'createClass'])->name('classes.create');
         Route::post('/classes', [AdminController::class, 'storeClass'])->name('classes.store');
         Route::get('/classes/{courseClass}/edit', [AdminController::class, 'editClass'])->name('classes.edit');
         Route::put('/classes/{courseClass}', [AdminController::class, 'updateClass'])->name('classes.update');

@@ -33,6 +33,12 @@ class AdminController extends Controller
         return view('admin.users.index', compact('users'));
     }
 
+    public function createUser()
+    {
+        if (Auth::user()->role !== 'admin') abort(403);
+        return view('admin.users.create');
+    }
+
     public function storeUser(Request $request)
     {
         if (Auth::user()->role !== 'admin') abort(403);
@@ -60,6 +66,12 @@ class AdminController extends Controller
         return view('admin.courses.index', compact('courses'));
     }
 
+    public function createCourse()
+    {
+        if (Auth::user()->role !== 'admin') abort(403);
+        return view('admin.courses.create');
+    }
+
     public function storeCourse(Request $request)
     {
         if (Auth::user()->role !== 'admin') abort(403);
@@ -79,8 +91,14 @@ class AdminController extends Controller
     {
         if (Auth::user()->role !== 'admin') abort(403);
         $classes = CourseClass::with('course')->latest()->paginate(10);
-        $courses = Course::all(); // For create modal/form if needed there
-        return view('admin.classes.index', compact('classes', 'courses'));
+        return view('admin.classes.index', compact('classes'));
+    }
+
+    public function createClass()
+    {
+        if (Auth::user()->role !== 'admin') abort(403);
+        $courses = Course::all();
+        return view('admin.classes.create', compact('courses'));
     }
 
     public function storeClass(Request $request)
