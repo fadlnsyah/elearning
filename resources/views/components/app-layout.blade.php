@@ -99,13 +99,54 @@
                     </div>
                 </div>
 
-                <div class="flex items-center gap-4">
+                <div class="flex items-center gap-4" x-data="{ dropdownOpen: false }">
                     <div class="text-right hidden sm:block">
-                        <div class="text-sm font-medium text-slate-700">{{ Auth::user()->name }}</div>
+                        <div class="text-sm font-bold text-slate-800">
+                            @if(Auth::user()->identity_number)
+                            <span class="text-indigo-600 mr-1">{{ Auth::user()->identity_number }}</span>
+                            @endif
+                            {{ Auth::user()->name }}
+                        </div>
                         <div class="text-xs text-slate-500 capitalize">{{ Auth::user()->role }}</div>
                     </div>
-                    <div class="h-9 w-9 bg-indigo-100 rounded-full flex items-center justify-center text-indigo-700 font-bold border border-indigo-200">
-                        {{ substr(Auth::user()->name, 0, 1) }}
+
+                    <div class="relative">
+                        <button @click="dropdownOpen = !dropdownOpen" @click.away="dropdownOpen = false" class="flex items-center gap-2 focus:outline-none">
+                            <div class="h-10 w-10 rounded-full bg-indigo-100 flex items-center justify-center text-indigo-700 font-bold border border-indigo-200 overflow-hidden">
+                                @if(Auth::user()->avatar)
+                                <img src="{{ asset('storage/avatars/' . Auth::user()->avatar) }}" class="w-full h-full object-cover">
+                                @else
+                                {{ substr(Auth::user()->name, 0, 1) }}
+                                @endif
+                            </div>
+                        </button>
+
+                        <div x-show="dropdownOpen"
+                            class="absolute right-0 mt-2 w-48 bg-white rounded-xl shadow-lg border border-slate-100 py-1 z-50 transform origin-top-right transition-all duration-200"
+                            x-transition:enter="transition ease-out duration-100"
+                            x-transition:enter-start="opacity-0 scale-95"
+                            x-transition:enter-end="opacity-100 scale-100"
+                            x-transition:leave="transition ease-in duration-75"
+                            x-transition:leave-start="opacity-100 scale-100"
+                            x-transition:leave-end="opacity-0 scale-95"
+                            style="display: none;">
+
+                            <div class="px-4 py-2 border-b border-slate-50 sm:hidden">
+                                <div class="text-sm font-bold text-slate-800">{{ Auth::user()->name }}</div>
+                                <div class="text-xs text-slate-500">{{ Auth::user()->identity_number }}</div>
+                            </div>
+
+                            <a href="{{ route('profile.edit') }}" class="block px-4 py-2 text-sm text-slate-700 hover:bg-slate-50 hover:text-indigo-600 transition-colors">
+                                Edit Profile
+                            </a>
+
+                            <form method="POST" action="{{ route('logout') }}">
+                                @csrf
+                                <button class="w-full text-left px-4 py-2 text-sm text-rose-600 hover:bg-rose-50 transition-colors">
+                                    Sign Out
+                                </button>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </header>

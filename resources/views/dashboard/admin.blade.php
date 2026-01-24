@@ -38,6 +38,10 @@
                     </div>
                 </div>
                 <div>
+                    <label class="block text-sm font-medium text-slate-700 mb-1">Identity Number (NIM/NID)</label>
+                    <input type="text" name="identity_number" placeholder="Optional for Admin" class="w-full px-3 py-2 rounded-lg border border-slate-200 outline-none focus:border-indigo-500">
+                </div>
+                <div>
                     <label class="block text-sm font-medium text-slate-700 mb-1">Username</label>
                     <input type="text" name="username" class="w-full px-3 py-2 rounded-lg border border-slate-200 outline-none focus:border-indigo-500" required>
                 </div>

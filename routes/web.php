@@ -22,6 +22,10 @@ Route::post('/logout', [AuthController::class, 'logout'])->name('logout')->middl
 Route::middleware('auth')->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
+    // Profile
+    Route::get('/profile', [App\Http\Controllers\ProfileController::class, 'edit'])->name('profile.edit');
+    Route::put('/profile', [App\Http\Controllers\ProfileController::class, 'update'])->name('profile.update');
+
     // Enrollment Page (Find Classes)
     Route::get('/classes', [ClassController::class, 'index'])->name('classes.index');
     Route::post('/classes/{courseClass}/enroll', [ClassController::class, 'enroll'])->name('classes.enroll');

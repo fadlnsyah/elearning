@@ -33,6 +33,7 @@ class AdminController extends Controller
             'email' => 'required|email|unique:users',
             'password' => 'required|min:6',
             'role' => 'required|in:admin,dosen,mahasiswa',
+            'identity_number' => 'nullable|string|unique:users',
         ]);
 
         $validated['password'] = Hash::make($validated['password']);
